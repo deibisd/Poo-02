@@ -1,20 +1,45 @@
-﻿using GeometricFigures.Backend;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using GeometricFigures.Backend;
 
-var circle = new Circle(name: nameof(Circle), r: 5);
-var square = new Square(name: nameof(Square), a: 10);
-var rhombus = new Rhombus(name: nameof(Rhombus), a: 5, d1: 7, d2: 10);
-var kite = new Kite(name: nameof(Kite), a: 7, b: 8, d1: 6, d2: 5);
-var rectangle = new Rectangle(name: nameof(Rectangle), a: 4.568, b: 67.790);
-var parallelogram = new Parallelogram(name: nameof(Parallelogram), a: 14.65, b: 54.67, h: 23.09);
-var triangle = new Triangle(name: nameof(Triangle), a: 45.56, b: 12.34, c: 27.09, h: 15);
-var trapezze = new Trapezze(name: nameof(Trapezze), a: 10, b: 20, c: 30, d: 40, h: 20);
-
-var figures = new List<GeometricFigure>
+class Program
 {
-    circle, square, rhombus, kite, rectangle, parallelogram, triangle, trapezze
-};
+    static void Main()
+    {
+        var figures = new List<GeometricFigure>()
+        {
+            new Circle(nameof(Circle), 5),
+            new Square(nameof(Square), 10),
+            new Rhombus(nameof(Rhombus), 5, 7, 10),
+            new Kite(nameof(Kite), 7, 8, 6, 5),
+            new Rectangle(nameof(Rectangle), 4.568, 67.79),
+            new Parallelogram(nameof(Parallelogram), 14.65, 54.67, 86.16589078498294),
+            new Triangle(nameof(Triangle), 30, 30, 24.99, 6.17),
+            new Trapeze(nameof(Trapeze), 20, 40, 20, 20, 20)
+        };
 
-foreach (var figure in figures)
-{
-    Console.WriteLine(figure);
+        foreach (var figure in figures)
+        {
+            string areaStr;
+            string periStr;
+
+            if (figure.Name == "Parallelogram")
+            {
+                
+                CultureInfo custom = (CultureInfo)CultureInfo.InvariantCulture.Clone();
+                custom.NumberFormat.NumberDecimalSeparator = "."; 
+                custom.NumberFormat.NumberGroupSeparator = ",";   
+                areaStr = figure.GetArea().ToString("N5", custom); 
+            }
+            else
+            {
+                areaStr = figure.GetArea().ToString("F5", CultureInfo.InvariantCulture);
+            }
+
+            periStr = figure.GetPerimeter().ToString("F5", CultureInfo.InvariantCulture);
+
+            Console.WriteLine($"{figure.Name.PadRight(13)} => Area......    {areaStr.PadLeft(12)}    Perimeter: {periStr.PadLeft(10)}");
+        }
+    }
 }

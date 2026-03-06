@@ -1,44 +1,52 @@
 ﻿namespace GeometricFigures.Backend
 {
-    public class Rhombus : GeometricFigure
+    public class Rhombus : Square
     {
-
-        // Fields
-        private double _a;
         private double _d1;
         private double _d2;
 
-        // Constructors
-        public Rhombus(string name, double a, double d1, double d2) : base(name)
-        {
-            A = a;
-            D1 = d1;
-            D2 = d2;
-        }
-
-        // Properties
-        public double A
-        {
-            get => _a;
-            set => _a = value;
-        }
-
         public double D1
         {
-            get => _d1;
-            set => _d1 = value;
+            get { return _d1; }
+            set
+            {
+                ValidateD1(value);
+                _d1 = value;
+            }
         }
 
         public double D2
         {
-            get => _d2;
-            set => _d2 = value;
+            get { return _d2; }
+            set
+            {
+                ValidateD2(value);
+                _d2 = value;
+            }
         }
 
-        // Methods
+        public Rhombus(string name, double a, double d1, double d2)
+            : base(name, a)
+        {
+            D1 = d1;
+            D2 = d2;
+        }
+
+        private void ValidateD1(double value)
+        {
+            if (value <= 0)
+                throw new ArgumentException("D1 must be greater than zero.");
+        }
+
+        private void ValidateD2(double value)
+        {
+            if (value <= 0)
+                throw new ArgumentException("D2 must be greater than zero.");
+        }
+
         public override double GetArea()
         {
-            return (D1 * D2) / 2;
+            return (_d1 * _d2) / 2;
         }
 
         public override double GetPerimeter()

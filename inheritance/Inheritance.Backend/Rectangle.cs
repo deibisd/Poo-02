@@ -1,33 +1,34 @@
 ﻿namespace GeometricFigures.Backend
 {
-    public class Rectangle : GeometricFigure
+    public class Rectangle : Square
     {
-
-        // Fields
-        private double _a;
+        
         private double _b;
 
-        // Constructors
-        public Rectangle(string name, double a, double b) : base(name)
+       
+        public double B
         {
-            A = a;
+            get { return _b; }
+            set
+            {
+                ValidateB(value);
+                _b = value;
+            }
+        }
+
+        public Rectangle(string name, double a, double b) : base(name, a)
+        {
             B = b;
         }
 
-        // Properties
-        public double A
+        private void ValidateB(double value)
         {
-            get => _a;
-            set => _a = value;
+            if (value <= 0)
+            {
+                throw new ArgumentException("B must be greater than zero.");
+            }
         }
 
-        public double B
-        {
-            get => _b;
-            set => _b = value;
-        }
-
-        // Methods
         public override double GetArea()
         {
             return A * B;

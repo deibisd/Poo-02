@@ -1,35 +1,38 @@
-﻿using System;
-
-namespace GeometricFigures.Backend
+﻿namespace GeometricFigures.Backend
 {
     public class Circle : GeometricFigure
     {
-
-        // Fields
         private double _r;
 
-        // Constructors
+        public double R
+        {
+            get { return _r; }
+            set
+            {
+                ValidateR(value);
+                _r = value;
+            }
+        }
+
         public Circle(string name, double r) : base(name)
         {
             R = r;
         }
 
-        // Properties
-        public double R
+        private void ValidateR(double r)
         {
-            get => _r;
-            set => _r = value;
+            if (r <= 0)
+                throw new ArgumentException("R must be greater than zero.");
         }
 
-        // Methods
         public override double GetArea()
         {
-            return Math.PI * R * R;
+            return Math.PI * _r * _r;
         }
 
         public override double GetPerimeter()
         {
-            return 2 * Math.PI * R;
+            return 2 * Math.PI * _r;
         }
     }
 }

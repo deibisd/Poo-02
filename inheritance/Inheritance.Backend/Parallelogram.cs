@@ -1,39 +1,36 @@
 ﻿namespace GeometricFigures.Backend
 {
-    public class Parallelogram : GeometricFigure
+    public class Parallelogram : Rectangle
     {
-        private double _a;
-        private double _b;
         private double _h;
-
-        public Parallelogram(string name, double a, double b, double h) : base(name)
-        {
-            A = a;
-            B = b;
-            H = h;
-        }
-
-        public double A
-        {
-            get => _a;
-            set => _a = value;
-        }
-
-        public double B
-        {
-            get => _b;
-            set => _b = value;
-        }
 
         public double H
         {
-            get => _h;
-            set => _h = value;
+            get { return _h; }
+            set
+            {
+                ValidateH(value);
+                _h = value;
+            }
+        }
+
+        public Parallelogram(string name, double a, double b, double h)
+            : base(name, a, b)
+        {
+            H = h;
+        }
+
+        private void ValidateH(double value)
+        {
+            if (value <= 0)
+            {
+                throw new ArgumentException("H must be greater than zero.");
+            }
         }
 
         public override double GetArea()
         {
-            return B * H;
+            return A * _h;
         }
 
         public override double GetPerimeter()

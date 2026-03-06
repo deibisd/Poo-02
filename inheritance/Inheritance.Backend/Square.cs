@@ -2,32 +2,39 @@
 {
     public class Square : GeometricFigure
     {
-
-        // Fields
+        
         private double _a;
 
-        // Constructors
+        
+        public double A
+        {
+            get { return _a; }
+            set
+            {
+                ValidateA(value);
+                _a = value;
+            }
+        }
+
         public Square(string name, double a) : base(name)
         {
             A = a;
         }
 
-        // Properties
-        public double A
+        private void ValidateA(double value)
         {
-            get => _a;
-            set => _a = value;
+            if (value <= 0)
+                throw new ArgumentException("A must be greater than zero.");
         }
 
-        // Methods
         public override double GetArea()
         {
-            return A * A;
+            return _a * _a;
         }
 
         public override double GetPerimeter()
         {
-            return 4 * A;
+            return 4 * _a;
         }
     }
 }

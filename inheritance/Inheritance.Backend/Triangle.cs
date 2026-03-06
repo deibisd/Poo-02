@@ -1,47 +1,54 @@
 ﻿namespace GeometricFigures.Backend
 {
-    public class Triangle : GeometricFigure
+    public class Triangle : Rectangle
     {
-        private double _a;
-        private double _b;
+        
         private double _c;
         private double _h;
 
-        public Triangle(string name, double a, double b, double c, double h) : base(name)
-        {
-            A = a;
-            B = b;
-            C = c;
-            H = h;
-        }
-
-        public double A
-        {
-            get => _a;
-            set => _a = value;
-        }
-
-        public double B
-        {
-            get => _b;
-            set => _b = value;
-        }
-
+ 
         public double C
         {
-            get => _c;
-            set => _c = value;
+            get { return _c; }
+            set
+            {
+                ValidateC(value);
+                _c = value;
+            }
         }
 
         public double H
         {
-            get => _h;
-            set => _h = value;
+            get { return _h; }
+            set
+            {
+                ValidateH(value);
+                _h = value;
+            }
+        }
+
+        public Triangle(string name, double a, double b, double c, double h)
+            : base(name, a, b)
+        {
+            C = c;
+            H = h;
+        }
+
+        private void ValidateC(double value)
+        {
+            if (value <= 0)
+                throw new ArgumentException("C must be greater than zero.");
+        }
+
+        private void ValidateH(double value)
+        {
+            if (value <= 0)
+                throw new ArgumentException("H must be greater than zero.");
         }
 
         public override double GetArea()
         {
-            return (B * H) / 2;
+            return (A * H) / 2;
         }
 
         public override double GetPerimeter()

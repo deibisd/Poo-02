@@ -1,52 +1,34 @@
 ﻿namespace GeometricFigures.Backend
 {
-    public class Kite : GeometricFigure
+    public class Kite : Rhombus
     {
-
-        // Fields
-        private double _a;
         private double _b;
-        private double _d1;
-        private double _d2;
-
-        // Constructors
-        public Kite(string name, double a, double b, double d1, double d2) : base(name)
-        {
-            A = a;
-            B = b;
-            D1 = d1;
-            D2 = d2;
-        }
-
-        // Properties
-        public double A
-        {
-            get => _a;
-            set => _a = value;
-        }
 
         public double B
         {
-            get => _b;
-            set => _b = value;
+            get { return _b; }
+            set
+            {
+                ValidateB(value);
+                _b = value;
+            }
         }
 
-        public double D1
+        public Kite(string name, double a, double b, double d1, double d2)
+            : base(name, a, d1, d2)
         {
-            get => _d1;
-            set => _d1 = value;
+            B = b;
         }
 
-        public double D2
+        private void ValidateB(double b)
         {
-            get => _d2;
-            set => _d2 = value;
+            if (b <= 0)
+                throw new ArgumentException("B must be greater than zero.");
         }
 
-        // Methods
         public override double GetArea()
         {
-            return (D1 * D2) / 2;
+            return base.GetArea();
         }
 
         public override double GetPerimeter()

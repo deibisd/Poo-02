@@ -1,61 +1,41 @@
 ﻿namespace GeometricFigures.Backend
 {
-    public class Trapezze : GeometricFigure
+    public class Trapeze : Triangle
     {
-        // Fields
-        private double _a;
-        private double _b;
-        private double _c;
         private double _d;
-        private double _h;
 
-        // Constructor
-        public Trapezze(string name, double a, double b, double c, double d, double h) : base(name)
-        {
-            A = a;
-            B = b;
-            C = c;
-            D = d;
-            H = h;
-        }
-
-        // Properties
-        public double A
-        {
-            get => _a;
-            set => _a = value;
-        }
-
-        public double B
-        {
-            get => _b;
-            set => _b = value;
-        }
-
-        public double C
-        {
-            get => _c;
-            set => _c = value;
-        }
-
+       
         public double D
         {
-            get => _d;
-            set => _d = value;
+            get { return _d; }
+            set
+            {
+                ValidateD(value);
+                _d = value;
+            }
         }
 
-        public double H
+        
+        public Trapeze(string name, double a, double b, double c, double d, double h)
+            : base(name, a, b, c, h)
         {
-            get => _h;
-            set => _h = value;
+            D = d;
         }
 
-        // Methods
+      
+        private void ValidateD(double value)
+        {
+            if (value <= 0)
+                throw new ArgumentException("D must be greater than zero.");
+        }
+
+        
         public override double GetArea()
         {
-            return (A + B) * H;
+            return ((A + B) / 2) * H; 
         }
 
+        
         public override double GetPerimeter()
         {
             return A + B + C + D;
