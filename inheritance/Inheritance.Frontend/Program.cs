@@ -11,7 +11,7 @@ var trapezze = new Trapezze(name: nameof(Trapezze), a: 10, b: 20, c: 30, d: 40, 
 
 var figures = new List<GeometricFigure>
 {
-    circle, square, rhombus, kite, rectangle, parallelogram, triangle,trapezze
+    circle, square, rhombus, kite, rectangle, parallelogram, triangle, trapezze
 };
 
 foreach (var figure in figures)
